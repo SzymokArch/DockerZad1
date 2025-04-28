@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprawdzanie pogody</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 5px 0 10px;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .info {
+            color: #333;
+        }
+    </style>
+    <script>
+        // Funkcja wysyłająca dane do serwera i odbierająca odpowiedź pogodową
+        async function getWeather() {
+            const country = document.getElementById("country").value;
+            const city = document.getElementById("city").value;
+
+            // Walidacja
+            if (!country || !city) {
+                document.getElementById("result").innerHTML = `<p class="error">Proszę wypełnić wszystkie pola!</p>`;
+                return;
+            }
+
+            try {
+                const response = await fetch('/weather', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ country, city })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Nie udało się pobrać danych pogodowych');
+                }
+
+                const data = await response.json();
+                const info = data.weather ? `
+                    <p><strong>Temperatura:</strong> ${data.weather.main.temp}°C</p>
+                    <p><strong>Warunki:</strong> ${data.weather.weather[0].description}</p>
+                    <p><strong>Wilgotność:</strong> ${data.weather.main.humidity}%</p>
+                ` : `<p class="error">Błąd pobierania danych pogodowych</p>`;
+
+                // Wyświetlenie danych na stronie
+                document.getElementById("result").innerHTML = info;
+            } catch (error) {
+                // Obsługa błędów
+                document.getElementById("result").innerHTML = `<p class="error">${error.message}</p>`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Sprawdź aktualną pogodę</h1>
+
+    <!-- Wybór kraju -->
+    <label for="country">Wybierz kraj:</label>
+    <select id="country">
+        <option value="">-- Wybierz kraj --</option>
+        <option value="PL">Polska</option>
+        <option value="DE">Niemcy</option>
+        <option value="FR">Francja</option>
+    </select>
+
+    <!-- Pole tekstowe do wpisania miasta -->
+    <label for="city">Wpisz miasto:</label>
+    <input type="text" id="city" placeholder="np. Lublin" />
+
+    <!-- Przycisk uruchamiający zapytanie -->
+    <button onclick="getWeather()">Sprawdź pogodę</button>
+
+    <!-- Wyświetlenie wyniku -->
+    <div id="result"></div>
+</body>
+</html>
