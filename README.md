@@ -9,7 +9,8 @@ Projekt: Aplikacja pogodowa konteneryzowana w Dockerze
 - app.js – plik źródłowy Express.js z funkcjami
 - public/index.html – plik .html z formularzem wyboru miasta i kraju
 - package.json / package-lock.json – zależności  
-- Dockerfile – wieloetapowy plik Dockerfile opisujący konteneryzację    
+- Dockerfile – wieloetapowy plik Dockerfile opisujący konteneryzację
+- img/screenshot.png - screenshot z działającego programu    
 
 ---
 
