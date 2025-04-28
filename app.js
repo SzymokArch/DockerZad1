@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const AUTHOR = "Szymon Zięba";
-const OPENWEATHER_API_KEY = 'a89ad5ada17611bcaa21088922b2d3ba';
+const OPENWEATHER_API_KEY = 'API_KEY_HERE';
 const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Log application start date and author details
