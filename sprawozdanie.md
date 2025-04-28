@@ -29,7 +29,7 @@ Zrzut ekranu z działania aplikacji znajduje się w folderze img/screen.png
 
 ## Polecenia z realizacji zadania
 
-1. Budowanie obrazu:
+### 1. Budowanie obrazu:
 
 docker build -t pogoda .
 
@@ -37,7 +37,7 @@ Komentarz: Buduje obraz z pliku Dockerfile. Użyto wieloetapowej budowy oraz lek
 
 ---
 
-2. Uruchomienie kontenera:
+### 2. Uruchomienie kontenera:
 
 docker run -d -p 3000:3000 --name pogoda-kontener pogoda
 
@@ -45,7 +45,7 @@ Komentarz: Uruchamia kontener w tle, mapując port lokalny 3000 do aplikacji dzi
 
 ---
 
-3. Sprawdzenie działania aplikacji (logi):
+### 3. Sprawdzenie działania aplikacji (logi):
 
 docker logs pogoda-kontener
 
@@ -56,7 +56,7 @@ Przykładowy wynik:
 
 ---
 
-4. Informacje o obrazie
+### 4. Informacje o obrazie
 
 Liczba warstw i historia:
 
