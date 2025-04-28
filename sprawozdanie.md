@@ -20,10 +20,8 @@ Po uruchomieniu kontenera aplikacja:
 - udostępnia interfejs na porcie 3000  
 - pozwala wybrać kraj i miasto z formularza  
 - pobiera pogodę z API OpenWeatherMap  
-- wyświetla dane (temperatura, warunki, wilgotność)  
-- obsługuje błędy (np. brak miasta lub błędny kraj)
-
-Zrzut ekranu z działania aplikacji znajduje się w folderze img/screen.png
+- wyświetla dane *(temperatura, warunki, wilgotność)*  
+- obsługuje błędy *(np. brak miasta lub błędny kraj)*
 
 ---
 
@@ -31,23 +29,23 @@ Zrzut ekranu z działania aplikacji znajduje się w folderze img/screen.png
 
 ### 1. Budowanie obrazu:
 
-docker build -t pogoda .
+`docker build -t pogoda .`
 
-Komentarz: Buduje obraz z pliku Dockerfile. Użyto wieloetapowej budowy oraz lekkiego obrazu node:alpine.
+*Komentarz: Buduje obraz z pliku Dockerfile. Użyto wieloetapowej budowy oraz lekkiego obrazu node:alpine.*
 
 ---
 
 ### 2. Uruchomienie kontenera:
 
-docker run -d -p 3000:3000 --name pogoda-kontener pogoda
+`docker run -d -p 3000:3000 --name pogoda-kontener pogoda`
 
-Komentarz: Uruchamia kontener w tle, mapując port lokalny 3000 do aplikacji działającej w kontenerze.
+*Komentarz: Uruchamia kontener w tle, mapując port lokalny 3000 do aplikacji działającej w kontenerze.*
 
 ---
 
 ### 3. Sprawdzenie działania aplikacji (logi):
 
-docker logs pogoda-kontener
+`docker logs pogoda-kontener`
 
 Przykładowy wynik:  
 [Start aplikacji] Data uruchomienia: 2025-04-21T...  
@@ -60,13 +58,13 @@ Przykładowy wynik:
 
 Liczba warstw i historia:
 
-docker history pogoda
+`docker history pogoda`
 
 Szczegóły techniczne obrazu:
 
-docker image inspect pogoda
+`docker image inspect pogoda`
 
-Komentarz: Pokazuje rozmiar końcowy, autora, liczbę warstw itd.
+*Komentarz: Pokazuje rozmiar końcowy, autora, liczbę warstw itd.*
 
 ---
 
@@ -76,6 +74,6 @@ Aplikacja działa w pełni w środowisku kontenerowym. Wykorzystano lekką wersj
 
 Podczas realizacji zadania:
 
-- zadbano o czytelne komunikaty w logach startowych aplikacji (data, autor, port)
+- zadbano o czytelne komunikaty w logach startowych aplikacji *(data, autor, port)*
 - dostosowano strukturę folderów oraz nazewnictwo do potrzeb projektu
-- zaimplementowano podstawową obsługę błędów (np. niepoprawna lokalizacja)
+- zaimplementowano podstawową obsługę błędów *(np. niepoprawna lokalizacja)*
